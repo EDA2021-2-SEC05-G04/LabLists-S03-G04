@@ -29,7 +29,7 @@ import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
-
+from time import process_time 
 """
 Se define la estructura de un catálogo de libros.
 El catálogo tendrá tres listas, una para libros, otra para autores
@@ -40,6 +40,7 @@ y otra para géneros
 
 
 def newCatalog():
+    t1=process_time()
     """
     Inicializa el catálogo de libros. Crea una lista vacia para guardar
     todos los libros, adicionalmente, crea una lista vacia para los autores,
@@ -52,12 +53,13 @@ def newCatalog():
                'book_tags': None}
 
     catalog['books'] = lt.newList()
-    catalog['authors'] = lt.newList('ARRAY_LIST',
+    catalog['authors'] = lt.newList('SINGLE_LINKED',
                                     cmpfunction=compareauthors)
-    catalog['tags'] = lt.newList('ARRAY_LIST',
+    catalog['tags'] = lt.newList('SINGLE_LINKED',
                                  cmpfunction=comparetagnames)
-    catalog['book_tags'] = lt.newList('ARRAY_LIST')
-
+    catalog['book_tags'] = lt.newList('SINGLE_LINKED')
+    t2=process_time()
+    print(str(t2-t1))
     return catalog
 
 
